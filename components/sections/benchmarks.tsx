@@ -1,7 +1,7 @@
 import CountUp from "@/components/reactbits/count-up";
 import { Container } from "@/components/shared/container";
-import { LineChart } from "@/components/shared/line-chart";
 import { LogBarChart } from "@/components/shared/log-bar-chart";
+import { ScrollScrubVideo } from "@/components/shared/scroll-scrub-video";
 import { SectionHeading } from "@/components/shared/section-heading";
 import { benchmarks } from "@/lib/content";
 import { cn } from "@/lib/utils";
@@ -19,7 +19,7 @@ export function Benchmarks() {
       <Container>
         <SectionHeading id="benchmarks-heading" title={benchmarks.title} description={benchmarks.description} />
 
-        {/* Headline metric + 30-day trend */}
+        {/* Headline metric + scroll-driven timelapse */}
         <div className="mt-14 grid gap-12 lg:mt-20 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-end lg:gap-16">
           <div>
             <p className="flex items-baseline font-serif text-[clamp(5rem,12vw,9rem)] leading-[0.85] tracking-[-0.04em] tabular-nums">
@@ -32,12 +32,7 @@ export function Benchmarks() {
             </p>
           </div>
 
-          <LineChart
-            data={headline.series}
-            yTicks={headline.yTicks}
-            unit={headline.chartUnit}
-            xLabels={[headline.xLabels[0], headline.xLabels[1]]}
-          />
+          <ScrollScrubVideo src={headline.video.src} label={headline.video.label} />
         </div>
 
         {/* Stat tiles */}

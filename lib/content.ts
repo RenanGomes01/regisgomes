@@ -533,13 +533,12 @@ export const benchmarks = {
     unit: "anos",
     label: "de trajetória nas artes plásticas",
     description:
-      "Contados desde 1990, quando expôs no 1º Salão Jovem Arte Mato-grossense, aos 16 anos. No gráfico: número de obras em cada mostra de 2014.",
-    /** Obras por mostra em 2014: SEC-MT (jan), Assembleia Legislativa (fev), MISC (jul). */
-    series: [15, 18, 17],
-    yTicks: [10, 15, 20],
-    /** Sufixo dos valores do eixo do gráfico. */
-    chartUnit: "",
-    xLabels: ["Jan 2014", "Jul 2014"],
+      "Contados desde 1990, quando expôs no 1º Salão Jovem Arte Mato-grossense, aos 16 anos. Ao lado, role a página e acompanhe um mural ganhar vida, pincelada a pincelada.",
+    /** Timelapse controlado pelo scroll (16:9, sem áudio). */
+    video: {
+      src: "/videos/timelapse.mp4",
+      label: "Timelapse de Régis Gomes pintando um mural",
+    },
   },
   stats: [
     { value: 3, suffix: "", label: "mostras em Cuiabá só em 2014: SEC-MT, Assembleia Legislativa e MISC" },
