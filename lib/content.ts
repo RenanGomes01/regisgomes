@@ -165,6 +165,10 @@ const img = {
   muralCompleto: `${IMG}/murais/mural6.png`,
   muralTurma: `${IMG}/murais/mural7.png`,
   muralEscola: `${IMG}/murais/mural8.png`,
+  /** Suportes (seção "A pintura como campo ampliado"). */
+  muroViolaDeCocho: `${IMG}/murais/mural16.png`,
+  painelPantanal: `${IMG}/murais/mural10.png`,
+  postePeixe: `${IMG}/murais/poste10.png`,
   /** Exposições — fotos da mostra "Nossa Cultura" no MISC. */
   misc1: `${IMG}/exposicoes/misc1.png`,
   misc2: `${IMG}/exposicoes/misc2.png`,
@@ -281,11 +285,10 @@ export const formats = {
     alt: "Obra de Régis Gomes",
   },
   items: [
-    { label: "Muro", ratio: "16:9", w: 16, h: 9, focus: "50% 50%", src: img.muralCompleto },
+    { label: "Muro", ratio: "16:9", w: 16, h: 9, focus: "50% 50%", src: img.muroViolaDeCocho },
     { label: "Tela", ratio: "1:1", w: 1, h: 1, focus: "50% 50%", src: img.dancaDaFita },
-    // TODO: sem fotos de painel e poste ainda — trocar quando houver.
-    { label: "Painel", ratio: "4:5", w: 4, h: 5, focus: "75% 50%", src: img.misc1 },
-    { label: "Poste", ratio: "9:16", w: 9, h: 16, focus: "40% 50%", src: img.muralAndaime },
+    { label: "Painel", ratio: "4:5", w: 4, h: 5, focus: "50% 50%", src: img.painelPantanal },
+    { label: "Poste", ratio: "9:16", w: 9, h: 16, focus: "50% 50%", src: img.postePeixe },
   ],
 };
 
