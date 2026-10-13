@@ -155,7 +155,7 @@ const img = {
   mascarados: `${IMG}/telas/tela6.png`,
   dancaDaFita: `${IMG}/telas/tela7.png`,
   violaDeCocho: `${IMG}/telas/tela8.png`,
-  dancaIndigena: `${IMG}/telas/tela9.png`,
+  festaDeSanto: `${IMG}/telas/tela9.png`,
   /** Murais (Arte Outside, Escola Floriano Bocheneki). tela4.png é foto de mural. */
   muroCasario: `${IMG}/telas/tela4.png`,
   muralPintando: `${IMG}/murais/mural2.png`,
@@ -193,7 +193,7 @@ const telas = [
   { src: img.muralAlunos, alt: "Alunos diante do mural de Régis Gomes" },
   { src: img.baianas, alt: "Pintura de Régis Gomes: baianas em festa de santo" },
   { src: img.muralAndaime, alt: "Régis Gomes pintando um mural sobre o andaime" },
-  { src: img.dancaIndigena, alt: "Pintura de Régis Gomes: dança indígena" },
+  { src: img.festaDeSanto, alt: "Pintura de Régis Gomes: santo sobre Cuiabá, com cortinas de chitão e viola de cocho" },
   { src: img.muralTurma, alt: "Turma de alunos em frente ao mural de Régis Gomes" },
   { src: img.muralEscola, alt: "Alunos e professores diante do mural da escola" },
 ];
@@ -262,7 +262,7 @@ export const variations = {
     { label: "Viola de cocho", src: img.violaDeCocho, filter: "none" },
     { label: "Dança da fita", src: img.dancaDaFita, filter: "none" },
     { label: "Muro do casario", src: img.muroCasario, filter: "none" },
-    { label: "Dança indígena", src: img.dancaIndigena, filter: "none" },
+    { label: "Festa de santo", src: img.festaDeSanto, filter: "none" },
     { label: "Mural na escola", src: img.muralPerspectiva, filter: "none" },
     { label: "Pintura ao vivo", src: img.muralPintando, filter: "none" },
     { label: "No andaime", src: img.muralAndaime, filter: "none" },
