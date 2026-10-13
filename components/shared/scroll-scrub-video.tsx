@@ -11,7 +11,8 @@ type ScrollScrubVideoProps = {
 
 /**
  * A muted video whose playback position follows the page scroll: 0% when the
- * container's top reaches 85% of the viewport, 100% when its bottom reaches 25%.
+ * container's top reaches 90% of the viewport, 100% when its bottom reaches 70%
+ * (fully in view, so the painting is finished while it is still being read).
  * The file is encoded with a keyframe every 6 frames, so seeking on every scroll
  * change stays cheap.
  */
@@ -21,7 +22,7 @@ export function ScrollScrubVideo({ src, label, className }: ScrollScrubVideoProp
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start 0.85", "end 0.25"],
+    offset: ["start 0.9", "end 0.7"],
   });
 
   function seek(progress: number) {
