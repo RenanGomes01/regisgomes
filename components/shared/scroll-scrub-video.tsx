@@ -34,6 +34,29 @@ export function ScrollScrubVideo({ src, poster, label, className }: ScrollScrubV
 
   useMotionValueEvent(scrollYProgress, "change", (latest) => seek(latest));
 
+  /**
+   * iOS Safari won't paint frames for a video that has never played, so seeking alone
+   * leaves the poster on screen. A silent play() + pause() unlocks it; if the browser
+   * refuses to play, the promise rejects and we just fall back to seeking.
+   */
+  function handleLoadedMetadata() {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const syncToScroll = () => seek(scrollYProgress.get());
+    const playing = video.play();
+    if (!playing) {
+      video.pause();
+      syncToScroll();
+      return;
+    }
+    playing
+      .then(() => video.pause())
+      .catch(() => {})
+      // play() may have advanced a few frames — snap back to the scroll position.
+      .finally(syncToScroll);
+  }
+
   // Mobile browsers often ignore preload="auto", so metadata never arrives and no frame
   // is drawn. Calling load() on mount makes them fetch the start of the file.
   useEffect(() => {
@@ -51,8 +74,7 @@ export function ScrollScrubVideo({ src, poster, label, className }: ScrollScrubV
         playsInline={true}
         preload="auto"
         disablePictureInPicture
-        // Metadata just arrived: jump to wherever the page is already scrolled.
-        onLoadedMetadata={() => seek(scrollYProgress.get())}
+        onLoadedMetadata={handleLoadedMetadata}
         className="aspect-video h-auto w-full rounded-xl object-cover shadow-2xl"
       />
     </div>
