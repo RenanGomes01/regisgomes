@@ -144,7 +144,7 @@ function ImageWave() {
                   }}
                   className="relative aspect-[3/4] w-[var(--card-w)] overflow-hidden rounded-2xl bg-muted shadow-[0_30px_60px_-30px_rgba(0,0,0,0.9)] ring-1 ring-white/10"
                 >
-                  <Image src={image.src} alt="" fill sizes="220px" className="object-cover" />
+                  <Image src={image.src} alt="" fill sizes="440px" quality={100} className="object-cover" />
                 </div>
               </li>
             )),

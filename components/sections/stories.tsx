@@ -154,7 +154,8 @@ export function Stories() {
                     src={story.image}
                     alt={story.imageAlt}
                     fill
-                    sizes="(max-width: 1024px) 92vw, 45vw"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    quality={100}
                     className="object-cover"
                   />
                 </motion.div>

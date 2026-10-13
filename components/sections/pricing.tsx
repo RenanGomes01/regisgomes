@@ -174,7 +174,7 @@ function PlanCard({ plan, billing }: { plan: Plan; billing: Billing }) {
           featured ? "bg-background/10" : "bg-muted",
         )}
       >
-        <Image src={plan.thumb} alt="" width={48} height={48} className="size-12 shrink-0 rounded-lg object-cover" />
+        <Image src={plan.thumb} alt="" width={48} height={48} quality={100} className="size-12 shrink-0 rounded-lg object-cover" />
         <div className="min-w-0">
           <p className="text-[15px] font-medium">{plan.allowance}</p>
           <p className={cn("text-sm", featured ? "text-background/65" : "text-muted-foreground")}>
@@ -226,7 +226,7 @@ function Enterprise() {
       <div className="relative grid h-44 grid-cols-3 gap-1.5 p-1.5 sm:h-56 lg:h-auto lg:min-h-72">
         {enterprise.images.map((src, i) => (
           <div key={src} className={cn("relative overflow-hidden rounded-xl", i === 1 && "translate-y-4")}>
-            <Image src={src} alt="" fill sizes="(max-width: 768px) 33vw, 15vw" className="object-cover" />
+            <Image src={src} alt="" fill sizes="(max-width: 768px) 50vw, 25vw" quality={100} className="object-cover" />
           </div>
         ))}
       </div>

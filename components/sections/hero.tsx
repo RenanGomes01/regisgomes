@@ -252,7 +252,8 @@ function ArcCard({ image, index, yaw, eager }: ArcCardProps) {
           src={image.src}
           alt={image.alt}
           fill
-          sizes="(max-width: 640px) 110px, 250px"
+          sizes="(max-width: 640px) 220px, 500px"
+          quality={100}
           loading={eager ? "eager" : "lazy"}
           className="object-cover"
           draggable={false}

@@ -35,7 +35,8 @@ export function Formats() {
                     src={item.src ?? formats.image.src}
                     alt={`${formats.image.alt} — ${item.label} ${item.ratio}`}
                     fill
-                    sizes="(max-width: 1024px) 70vw, 40vw"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    quality={100}
                     style={{ objectPosition: item.focus }}
                     className="object-cover transition-transform duration-700 ease-out-expo will-change-transform group-hover:scale-[1.03]"
                   />

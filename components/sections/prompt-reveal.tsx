@@ -136,7 +136,9 @@ export function PromptReveal() {
               src={promptReveal.image.src}
               alt={promptReveal.image.alt}
               fill
-              sizes="90vw"
+              sizes="100vw"
+              // Fills the whole screen — serve the original file untouched.
+              unoptimized
               className="object-cover"
             />
             {/* Bottom shade so the caption stays legible on any image */}
