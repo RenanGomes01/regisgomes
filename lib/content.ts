@@ -36,12 +36,14 @@ export const site = {
   ],
   /** Deixe vazio se não houver perfil no X/Twitter. */
   twitter: "",
-  /** TODO: e-mail real de contato do artista (aparece no FAQ e nos botões de contato). */
-  email: "contato@example.com",
+  /** E-mail de contato do artista (aparece no FAQ, no rodapé e na chamada final). */
+  email: "regisgomes7@hotmail.com",
   copyrightYear: CURRENT_YEAR,
 } as const;
 
 const contactHref = `mailto:${site.email}`;
+/** WhatsApp do artista — usado nos botões de encomenda. */
+const whatsappHref = "https://wa.me/5565992089841";
 
 /** Textos de interface usados pelos componentes (acessibilidade, rótulos, botões). */
 export const ui = {
@@ -398,7 +400,7 @@ export const pricing = {
         "Cores fortes e relevo",
       ],
       cta: "Consultar uma tela",
-      ctaHref: contactHref,
+      ctaHref: whatsappHref,
     },
     {
       id: "murais",
@@ -416,7 +418,7 @@ export const pricing = {
         "Experiência com projetos de fundo público",
       ],
       cta: "Pedir orçamento de mural",
-      ctaHref: contactHref,
+      ctaHref: whatsappHref,
       featured: true,
     },
     {
@@ -435,14 +437,14 @@ export const pricing = {
         "Formatos para editais",
       ],
       cta: "Agendar uma conversa",
-      ctaHref: contactHref,
+      ctaHref: whatsappHref,
     },
   ] satisfies Plan[],
   enterprise: {
     title: "Instituições",
     description:
       "Primeiro mato-grossense eleito para o Conselho Nacional de Política Cultural, Régis desenvolve projetos com museus, escolas e editais públicos.",
-    cta: { label: "Falar com o artista", href: contactHref },
+    cta: { label: "Falar com o artista", href: whatsappHref },
     features: [
       "Projetos para editais",
       "Murais em escolas",
