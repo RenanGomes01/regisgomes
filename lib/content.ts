@@ -174,10 +174,8 @@ const img = {
   misc2: `${IMG}/exposicoes/misc2.png`,
   misc3: `${IMG}/exposicoes/misc3.png`,
   /**
-   * TODO: quando tiver as fotos, salve em exposicoes/ com estes nomes e troque os
-   * usos de `img.violaDeCocho`/`img.mascarados` nas abas de Nova York e da Assembleia:
-   * - exposicoes/casa-brasil-nova-york.jpg
-   * - exposicoes/assembleia-legislativa.jpg
+   * TODO: quando tiver a foto, salve como exposicoes/assembleia-legislativa.jpg e
+   * troque o uso de `img.mascarados` na aba da Assembleia.
    */
 };
 
@@ -302,19 +300,6 @@ export const stories = {
   /** Intervalo de troca automática, em ms. */
   interval: 7000,
   items: [
-    {
-      company: "Nova York",
-      quote:
-        "Ao lado de outros quatro artistas mato-grossenses, levou suas telas para a mostra coletiva “As Cores do Pantanal”, na Casa Brasil.",
-      /** false = texto descritivo (sem aspas). Use true apenas para falas reais. */
-      cite: false,
-      name: "As Cores do Pantanal",
-      byline: "Casa Brasil, Nova York · 2013",
-      // TODO: trocar por exposicoes/casa-brasil-nova-york.jpg quando houver a foto.
-      image: img.violaDeCocho,
-      imageAlt: "Pintura de Régis Gomes",
-      caption: "As Cores do Pantanal · Nova York",
-    },
     {
       company: "Assembleia Legislativa",
       quote:

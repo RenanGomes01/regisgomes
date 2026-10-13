@@ -155,7 +155,7 @@ export function Stories() {
                     alt={story.imageAlt}
                     fill
                     sizes="(max-width: 1024px) 100vw, 50vw"
-                    quality={100}
+                    unoptimized
                     className="object-cover"
                   />
                 </motion.div>

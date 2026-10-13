@@ -295,7 +295,7 @@ function VariationCell({ index, label, src, filter, offset, focus, rank, progres
           fill
           // The favourite is shown almost full-screen at the end — request a large file for it.
           sizes={isFavorite ? "100vw" : "(max-width: 1024px) 50vw, 40vw"}
-          quality={100}
+          unoptimized
           className="object-cover"
           style={{ filter }}
           priority={isOriginal}
