@@ -1,7 +1,7 @@
 import { ArrowUpRight } from "lucide-react";
 
 import { Container } from "@/components/shared/container";
-import { footerLegal, footerNav, newsletter, site, systemStatus } from "@/lib/content";
+import { footerLegal, footerNav, newsletter, site, systemStatus, ui } from "@/lib/content";
 
 import { NewsletterForm } from "./newsletter-form";
 import { ThemeToggle } from "./theme-toggle";
@@ -13,7 +13,7 @@ export function SiteFooter() {
   return (
     <footer aria-labelledby="footer-heading" className="relative overflow-hidden bg-background text-foreground">
       <h2 id="footer-heading" className="sr-only">
-        Footer
+        {ui.footerHeading}
       </h2>
 
       <Container>
@@ -29,7 +29,7 @@ export function SiteFooter() {
               <NewsletterForm />
             </div>
 
-            <nav aria-label="Footer">
+            <nav aria-label={ui.footerNavLabel}>
               <div className="grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-3">
                 {footerNav.map((group) => (
                   <div key={group.title}>

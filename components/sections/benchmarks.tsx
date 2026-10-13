@@ -23,7 +23,7 @@ export function Benchmarks() {
         <div className="mt-14 grid gap-12 lg:mt-20 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-end lg:gap-16">
           <div>
             <p className="flex items-baseline font-serif text-[clamp(5rem,12vw,9rem)] leading-[0.85] tracking-[-0.04em] tabular-nums">
-              <CountUp to={headline.value} from={60} direction="up" duration={1.6} />
+              <CountUp to={headline.value} from={headline.from} direction="up" duration={1.6} />
               <span className="ml-1 text-[0.5em] text-muted-foreground">{headline.unit}</span>
             </p>
             <h3 className="mt-6 text-lg font-medium">{headline.label}</h3>
@@ -35,7 +35,7 @@ export function Benchmarks() {
           <LineChart
             data={headline.series}
             yTicks={headline.yTicks}
-            unit="s"
+            unit={headline.chartUnit}
             xLabels={[headline.xLabels[0], headline.xLabels[1]]}
           />
         </div>

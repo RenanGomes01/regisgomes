@@ -8,7 +8,7 @@ import { BrandMark } from "@/components/shared/brand-mark";
 import { useActiveSection } from "@/hooks/use-active-section";
 import { useOverElement } from "@/hooks/use-over-element";
 import { useScrolledPast } from "@/hooks/use-scrolled-past";
-import { headerCta, mainNav, site } from "@/lib/content";
+import { headerCta, mainNav, site, ui } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 import { MobileNav } from "./mobile-nav";
@@ -66,7 +66,7 @@ export function SiteHeader() {
 
   return (
     <header
-      aria-label="Site"
+      aria-label={ui.headerLabel}
       className={cn(
         "fixed inset-x-0 top-0 z-50 flex items-start justify-between gap-3 px-4 pt-4 sm:px-5 sm:pt-5",
         overDark && "dark",
@@ -83,7 +83,7 @@ export function SiteHeader() {
           <motion.div variants={itemVariants} className="flex items-center pr-1 pl-2">
             <a
               href="#top"
-              aria-label={`${site.name} home`}
+              aria-label={ui.homeLabel}
               className={cn(
                 "inline-flex h-9 items-center rounded-lg text-[15px] font-medium tracking-[-0.01em]",
                 focusRing,
@@ -134,7 +134,7 @@ export function SiteHeader() {
             type="button"
             aria-expanded={menuOpen}
             aria-controls={menuId}
-            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-label={menuOpen ? ui.menuClose : ui.menuOpen}
             onClick={() => setMenuOpen((open) => !open)}
             className={cn(
               "inline-flex size-9 items-center justify-center rounded-lg text-background/80 transition-colors hover:bg-background/10 hover:text-background md:hidden",

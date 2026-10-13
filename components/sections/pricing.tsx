@@ -8,7 +8,7 @@ import { useState } from "react";
 import { ArrowLink } from "@/components/shared/arrow-button";
 import { Container } from "@/components/shared/container";
 import { SectionHeading } from "@/components/shared/section-heading";
-import { pricing, site, type Plan } from "@/lib/content";
+import { pricing, type Plan } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 type Billing = "monthly" | "annual";
@@ -50,12 +50,12 @@ export function Pricing() {
 
 function BillingToggle({ value, onChange }: { value: Billing; onChange: (v: Billing) => void }) {
   const options: { value: Billing; label: string }[] = [
-    { value: "monthly", label: "Monthly" },
-    { value: "annual", label: "Annual" },
+    { value: "monthly", label: pricing.billingLabels.monthly },
+    { value: "annual", label: pricing.billingLabels.annual },
   ];
 
   return (
-    <div role="radiogroup" aria-label="Billing period" className="inline-flex rounded-xl bg-muted p-1">
+    <div role="radiogroup" aria-label={pricing.billingGroupLabel} className="inline-flex rounded-xl bg-muted p-1">
       {options.map((option) => {
         const selected = value === option.value;
         return (
@@ -79,7 +79,7 @@ function BillingToggle({ value, onChange }: { value: Billing; onChange: (v: Bill
             ) : null}
             <span className="relative inline-flex items-center gap-1.5">
               {option.label}
-              {option.value === "annual" ? (
+              {option.value === "annual" && pricing.annualDiscount > 0 ? (
                 <span className="rounded-md bg-emerald-400/15 px-1.5 py-0.5 text-[11px] font-medium text-emerald-600 dark:text-emerald-400">
                   −{pricing.annualDiscount}%
                 </span>
@@ -99,6 +99,9 @@ function BillingToggle({ value, onChange }: { value: Billing; onChange: (v: Bill
 function PlanCard({ plan, billing }: { plan: Plan; billing: Billing }) {
   const price = billing === "annual" ? plan.annual : plan.monthly;
   const featured = plan.featured === true;
+  // Text prices ("Sob consulta") are shown as-is, smaller and without currency.
+  const numeric = typeof price === "number";
+  const showStrike = numeric && billing === "annual" && typeof plan.monthly === "number" && plan.monthly !== price;
 
   return (
     <article
@@ -129,8 +132,13 @@ function PlanCard({ plan, billing }: { plan: Plan; billing: Billing }) {
 
       {/* Price — digits slide when switching billing */}
       <div className="mt-8 flex flex-wrap items-baseline gap-1.5">
-        <span className="text-2xl font-medium">$</span>
-        <span className="relative inline-flex overflow-hidden text-5xl leading-none font-medium tracking-[-0.03em] tabular-nums">
+        {numeric ? <span className="text-2xl font-medium">{pricing.currency}</span> : null}
+        <span
+          className={cn(
+            "relative inline-flex overflow-hidden leading-none font-medium tracking-[-0.03em] tabular-nums",
+            numeric ? "text-5xl" : "text-[2rem]",
+          )}
+        >
           <AnimatePresence mode="popLayout" initial={false}>
             <motion.span
               key={price}
@@ -143,17 +151,20 @@ function PlanCard({ plan, billing }: { plan: Plan; billing: Billing }) {
             </motion.span>
           </AnimatePresence>
         </span>
-        {billing === "annual" ? (
+        {showStrike ? (
           <span className={cn("ml-1 text-lg line-through", featured ? "text-background/40" : "text-muted-foreground/70")}>
-            ${plan.monthly}
+            {pricing.currency}
+            {plan.monthly}
           </span>
         ) : null}
-        <span className={cn("ml-auto text-sm", featured ? "text-background/65" : "text-muted-foreground")}>
-          per month
-        </span>
+        {pricing.priceSuffix ? (
+          <span className={cn("ml-auto text-sm", featured ? "text-background/65" : "text-muted-foreground")}>
+            {pricing.priceSuffix}
+          </span>
+        ) : null}
       </div>
       <p className={cn("mt-2 h-5 text-sm", featured ? "text-background/65" : "text-muted-foreground")}>
-        {billing === "annual" ? `Billed yearly — save ${pricing.annualDiscount}%` : "Billed monthly"}
+        {pricing.billedNote[billing]}
       </p>
 
       {/* Allowance */}
@@ -173,7 +184,7 @@ function PlanCard({ plan, billing }: { plan: Plan; billing: Billing }) {
       </div>
 
       <p className={cn("mt-7 text-xs font-medium tracking-[0.08em] uppercase", featured ? "text-background/60" : "text-muted-foreground")}>
-        Includes
+        {pricing.includesLabel}
       </p>
       <ul className="mt-4 mb-8 space-y-2.5 text-[15px]">
         {plan.features.map((feature) => (
@@ -188,7 +199,7 @@ function PlanCard({ plan, billing }: { plan: Plan; billing: Billing }) {
       </ul>
 
       <ArrowLink
-        href={`${site.appUrl}/sign-up?plan=${plan.id}`}
+        href={plan.ctaHref}
         variant={featured ? "secondary" : "primary"}
         className={cn(
           "mt-auto w-full",

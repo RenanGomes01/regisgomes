@@ -19,7 +19,7 @@ import { useRef, type PointerEvent } from "react";
 
 import { ArrowLink } from "@/components/shared/arrow-button";
 import { useRange } from "@/hooks/use-range";
-import { hero } from "@/lib/content";
+import { hero, ui } from "@/lib/content";
 
 /* -------------------------------------------------------------------------- */
 /*  Arc geometry                                                              */
@@ -160,7 +160,7 @@ export function Hero() {
         <div
           role="group"
           aria-roledescription="carousel"
-          aria-label="Showcase"
+          aria-label={ui.showcaseLabel}
           className="relative mx-auto h-[calc(var(--card-h)*1.45)] w-full overflow-visible [--arc-r:calc(var(--card-w)*2.75)] [--card-h:calc(var(--card-w)*1.3333)] [--card-w:clamp(104px,min(15vw,21svh),248px)] [perspective:calc(var(--arc-r)*2)]"
         >
           <motion.div

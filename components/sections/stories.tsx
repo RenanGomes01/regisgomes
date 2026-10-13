@@ -6,7 +6,7 @@ import { useEffect, useId, useRef, useState, type KeyboardEvent } from "react";
 
 import { Container } from "@/components/shared/container";
 import { SectionHeading } from "@/components/shared/section-heading";
-import { stories } from "@/lib/content";
+import { stories, ui } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -72,15 +72,14 @@ export function Stories() {
                 transition={{ duration: 0.5, ease: EASE }}
               >
                 <p className="font-serif text-[clamp(1.75rem,3vw,2.75rem)] leading-[1.12] tracking-[-0.015em] text-pretty">
-                  <span aria-hidden className="text-muted-foreground">“</span>
-                  {story.quote}
-                  <span aria-hidden className="text-muted-foreground">”</span>
+                  {/* Quote marks only for real quotes (`cite: true`); descriptions render plain. */}
+                  {story.cite ? <span aria-hidden className="text-muted-foreground">“</span> : null}
+                  <span>{story.quote}</span>
+                  {story.cite ? <span aria-hidden className="text-muted-foreground">”</span> : null}
                 </p>
                 <footer className="mt-8 text-[15px]">
                   <span className="font-medium">{story.name}</span>
-                  <span className="text-muted-foreground">
-                    , {story.role}, {story.company}
-                  </span>
+                  <span className="text-muted-foreground">, {story.byline}</span>
                 </footer>
               </motion.blockquote>
             </AnimatePresence>
@@ -88,7 +87,7 @@ export function Stories() {
             {/* Tabs — a progress line fills above the active company */}
             <div
               role="tablist"
-              aria-label="Customer stories"
+              aria-label={ui.storiesTabsLabel}
               className="scrollbar-none -mx-4 flex gap-6 overflow-x-auto border-t border-border px-4 sm:mx-0 sm:gap-8 sm:px-0"
             >
               {stories.items.map((item, i) => {
@@ -153,7 +152,7 @@ export function Stories() {
                 >
                   <Image
                     src={story.image}
-                    alt={`${story.company} campaign image`}
+                    alt={story.imageAlt}
                     fill
                     sizes="(max-width: 1024px) 92vw, 45vw"
                     className="object-cover"

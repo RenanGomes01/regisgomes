@@ -1,0 +1,24 @@
+IMAGENS DO PORTFÓLIO — RÉGIS GOMES
+==================================
+Cada foto é mapeada no objeto `img` de lib/content.ts. Para trocar uma imagem,
+substitua o arquivo mantendo o mesmo nome, ou adicione um novo e ajuste o `img`.
+
+telas/
+  tela1, tela2, tela5, tela6, tela7, tela8, tela9 (.png)
+                               Pinturas: carrossel do topo, onda final e grade de obras.
+                               tela8.png é a obra em "Destaque" (fala do artista e grade).
+  tela4.png                    Foto de mural (casario e frutas).
+  tela3.png, tela10.png        Cópias menores da tela8 — não usadas.
+
+murais/
+  mural2 … mural8 (.png)       Mural Arte Outside (Escola Floriano Bocheneki).
+                               mural6.png é a vista completa do muro.
+
+exposicoes/
+  misc1, misc2, misc3 (.png)   Mostra "Nossa Cultura" no MISC.
+  Ainda faltam (salve com estes nomes e ajuste lib/content.ts):
+    casa-brasil-nova-york.jpg  As Cores do Pantanal — Casa Brasil, Nova York.
+    assembleia-legislativa.jpg Cultura Popular Nacional — Instituto Memória da ALMT.
+
+Obs.: vários arquivos .png são JPEG/WebP/AVIF por dentro. O Next.js detecta o
+formato pelo conteúdo, então funcionam; ao exportar novos, prefira .jpg (~80%, até ~1 MB).

@@ -187,6 +187,7 @@ export function VariationsGrid() {
               key={cell.label}
               index={index}
               label={cell.label}
+              src={cell.src ?? variations.image.src}
               filter={cell.filter}
               offset={offsets[index]}
               focus={index === FAVORITE_INDEX ? focus : null}
@@ -225,6 +226,7 @@ export function VariationsGrid() {
 type VariationCellProps = {
   index: number;
   label: string;
+  src: string;
   filter: string;
   offset: Vector;
   /** Only set for the favourite — drives its zoom to centre stage. */
@@ -234,7 +236,7 @@ type VariationCellProps = {
   exit: MotionValue<number>;
 };
 
-function VariationCell({ index, label, filter, offset, focus, rank, progress, exit }: VariationCellProps) {
+function VariationCell({ index, label, src, filter, offset, focus, rank, progress, exit }: VariationCellProps) {
   const isOriginal = index === 0;
   const isFavorite = focus !== null;
 
@@ -288,8 +290,8 @@ function VariationCell({ index, label, filter, offset, focus, rank, progress, ex
         className="relative size-full overflow-hidden bg-muted shadow-[0_24px_60px_-30px_rgba(0,0,0,0.9)] ring-1 ring-white/10"
       >
         <Image
-          src={variations.image.src}
-          alt={isOriginal ? variations.image.alt : `${variations.image.alt} — ${label}`}
+          src={src}
+          alt={`${variations.image.alt} — ${label}`}
           fill
           // The favourite is shown almost full-screen at the end — request a large file for it.
           sizes={isFavorite ? "90vw" : "(max-width: 1024px) 34vw, 26vw"}

@@ -2,7 +2,7 @@
 
 import { motion } from "motion/react";
 
-import { headerCta, mainNav } from "@/lib/content";
+import { headerCta, mainNav, ui } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -18,7 +18,7 @@ export function MobileNav({ id, activeId, onNavigate }: MobileNavProps) {
   return (
     <motion.nav
       id={id}
-      aria-label="Mobile"
+      aria-label={ui.mobileNavLabel}
       initial={{ opacity: 0, y: -8, scale: 0.98 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       exit={{ opacity: 0, y: -8, scale: 0.98 }}

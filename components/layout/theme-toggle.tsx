@@ -4,12 +4,13 @@ import { Monitor, Moon, Sun } from "lucide-react";
 import { useTheme } from "next-themes";
 import { useSyncExternalStore } from "react";
 
+import { ui } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 const options = [
-  { value: "light", label: "Light", Icon: Sun },
-  { value: "system", label: "System", Icon: Monitor },
-  { value: "dark", label: "Dark", Icon: Moon },
+  { value: "light", label: ui.themeLight, Icon: Sun },
+  { value: "system", label: ui.themeSystem, Icon: Monitor },
+  { value: "dark", label: ui.themeDark, Icon: Moon },
 ] as const;
 
 const subscribe = () => () => {};
@@ -23,7 +24,7 @@ export function ThemeToggle({ className }: { className?: string }) {
   return (
     <div
       role="radiogroup"
-      aria-label="Theme"
+      aria-label={ui.themeGroup}
       className={cn("inline-flex items-center gap-0.5 rounded-lg border border-border p-0.5", className)}
     >
       {options.map(({ value, label, Icon }) => {

@@ -5,6 +5,7 @@ import { ArrowUp } from "lucide-react";
 import { motion } from "motion/react";
 
 import { useScrolledPast } from "@/hooks/use-scrolled-past";
+import { ui } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 /** Floating "back to top" button, inert until the visitor has scrolled a screen. */
@@ -21,7 +22,7 @@ export function BackToTop() {
     <div className="fixed right-6 bottom-6 z-50">
       <motion.button
         type="button"
-        aria-label="Back to top"
+        aria-label={ui.backToTop}
         disabled={!enabled}
         onClick={scrollToTop}
         initial={false}

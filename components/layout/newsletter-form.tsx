@@ -3,7 +3,7 @@
 import { ArrowRight, Check } from "lucide-react";
 import { useId, useState, type FormEvent } from "react";
 
-import { newsletter } from "@/lib/content";
+import { newsletter, ui } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 /** Email capture. Submission is mocked — wire `onSubmit` to the real provider later. */
@@ -22,7 +22,7 @@ export function NewsletterForm() {
   return (
     <form onSubmit={onSubmit} className="relative mt-6" noValidate={false}>
       <label htmlFor={inputId} className="sr-only">
-        Email address
+        {ui.emailLabel}
       </label>
       <input
         id={inputId}
@@ -36,7 +36,7 @@ export function NewsletterForm() {
       />
       <button
         type="submit"
-        aria-label="Subscribe"
+        aria-label={ui.subscribe}
         className="absolute top-1.5 right-1.5 inline-flex size-10 items-center justify-center rounded-lg bg-foreground text-background transition-[opacity,transform] hover:opacity-85 active:scale-95 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-ring"
       >
         {status === "done" ? <Check className="size-4" /> : <ArrowRight className="size-4" />}

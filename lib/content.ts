@@ -1,421 +1,567 @@
 /**
- * Central place for all copy, links and placeholder data.
- * Swap these values for the real brand later — components only read from here.
+ * Conteúdo do portfólio de Régis Gomes — textos, links e caminhos de imagem.
+ * Os componentes só leem daqui: para atualizar o site, edite este arquivo.
+ *
+ * Imagens: ficam em /public/images/regis/{telas,murais,exposicoes} e são mapeadas no
+ * objeto `img` mais abaixo (veja também LEIA-ME.txt naquela pasta).
+ *
+ * Fontes dos dados biográficos (consultadas em out/2026):
+ * - Mapas Culturais MT, perfil do agente 2517
+ * - g1 MT (jul/2014), Olhar Direto (jan/2014), Coisas de Mato Grosso (fev/2014)
+ * - Tyrannus Melancholicus e Prefeitura de Cuiabá (jul/2014) — mostra "Nossa Cultura" no MISC
+ * - HiperNotícias (dez/2015) — eleição para o Conselho Nacional de Política Cultural
+ * - Prefeitura de Cuiabá (jun/2016) — mural "Arte Outside"
  */
 
+/** Ano de referência para contagens ("há X anos"). Atualize junto com o copyright. */
+const CURRENT_YEAR = 2026;
+const FIRST_SALON_YEAR = 1990; // 1º Salão Jovem Arte Mato-grossense, aos 16 anos
+
 export const site = {
-  name: "Lumen",
-  url: "https://lumen.example.com",
-  appUrl: "https://app.lumen.example.com",
+  name: "Régis Gomes",
+  /** TODO: troque pelo domínio definitivo do deploy na Vercel. */
+  url: "https://regisgomes.vercel.app",
   description:
-    "Placeholder description for the brand. One or two sentences that explain what the product does and who it is for.",
-  keywords: ["placeholder", "creative studio", "visual production", "brand"],
-  twitter: "@lumen",
-  email: "hello@lumen.example.com",
-  copyrightYear: 2026,
+    "Portfólio de Régis Gomes (Cuiabá, 1974), artista plástico que pinta a cultura popular brasileira em telas, murais, painéis e nas ruas de Cuiabá.",
+  keywords: [
+    "Régis Gomes",
+    "artista plástico",
+    "Cuiabá",
+    "Mato Grosso",
+    "cultura popular",
+    "arte regional",
+    "siriri",
+    "cururu",
+    "murais",
+  ],
+  /** Deixe vazio se não houver perfil no X/Twitter. */
+  twitter: "",
+  /** TODO: e-mail real de contato do artista (aparece no FAQ e nos botões de contato). */
+  email: "contato@example.com",
+  copyrightYear: CURRENT_YEAR,
 } as const;
+
+const contactHref = `mailto:${site.email}`;
+
+/** Textos de interface usados pelos componentes (acessibilidade, rótulos, botões). */
+export const ui = {
+  lang: "pt-BR",
+  locale: "pt_BR",
+  skipLink: "Pular para o conteúdo",
+  headerLabel: "Cabeçalho",
+  homeLabel: `${site.name} — início`,
+  menuOpen: "Abrir menu",
+  menuClose: "Fechar menu",
+  mobileNavLabel: "Menu",
+  footerHeading: "Rodapé",
+  footerNavLabel: "Links do rodapé",
+  emailLabel: "Endereço de e-mail",
+  subscribe: "Inscrever-se",
+  themeGroup: "Tema",
+  themeLight: "Claro",
+  themeSystem: "Sistema",
+  themeDark: "Escuro",
+  backToTop: "Voltar ao topo",
+  showcaseLabel: "Obras em destaque",
+  promptSectionLabel: "Nas palavras do artista",
+  storiesTabsLabel: "Exposições e projetos",
+};
 
 export type NavItem = { label: string; href: string };
 
-/** Sections linked from the header pill — ids must match the section ids on the page. */
+/** Seções do menu do cabeçalho — os ids precisam bater com os ids das seções da página. */
 export const mainNav: NavItem[] = [
-  { label: "Features", href: "#features" },
-  { label: "Benchmarks", href: "#benchmarks" },
-  { label: "Stories", href: "#stories" },
-  { label: "Pricing", href: "#pricing" },
+  { label: "Obras", href: "#features" },
+  { label: "Trajetória", href: "#benchmarks" },
+  { label: "Exposições", href: "#stories" },
+  { label: "Encomendas", href: "#pricing" },
 ];
 
 export const headerCta = {
-  signIn: { label: "Sign in", href: `${site.appUrl}/sign-in` },
-  primary: { label: "Get started", href: "#pricing" },
+  signIn: { label: "Sobre", href: "#faq" },
+  primary: { label: "Encomendar", href: "#pricing" },
 };
 
 export type FooterGroup = { title: string; links: (NavItem & { external?: boolean })[] };
 
+export const press = {
+  g1: "https://g1.globo.com/mato-grosso/noticia/2014/07/artista-expoe-telas-no-museu-da-imagem-e-do-som-de-cuiaba.html",
+  olharDireto:
+    "https://www.olhardireto.com.br/conceito/noticias/um-brasil-colorido-e-retratado-nas-telas-de-regis-gomes-na-exposicao-nossa-cultura",
+  hnt: "https://www.hnt.com.br/cidades/artista-plastico-cuiabano-e-o-primeiro-mato-grossense-no-conselho-nacional-de-cultura/53020",
+  prefeituraMural:
+    "https://cuiaba.mt.gov.br/noticias/com-recursos-do-fundo-municipal-artista-plastico-retrata-tradicoes-em-muro-de-escola",
+  mapas: "https://mapas.mt.gov.br/agente/2517/",
+};
+
 export const footerNav: FooterGroup[] = [
   {
-    title: "Product",
+    title: "Navegação",
     links: [
-      { label: "Features", href: "#features" },
-      { label: "Benchmarks", href: "#benchmarks" },
-      { label: "Stories", href: "#stories" },
-      { label: "Pricing", href: "#pricing" },
-      { label: "FAQ", href: "#faq" },
+      { label: "Obras", href: "#features" },
+      { label: "Trajetória", href: "#benchmarks" },
+      { label: "Exposições", href: "#stories" },
+      { label: "Encomendas", href: "#pricing" },
+      { label: "Sobre", href: "#faq" },
     ],
   },
   {
-    title: "Company",
+    title: "Na imprensa",
     links: [
-      { label: "About", href: `${site.url}/about` },
-      { label: "Journal", href: `${site.url}/journal` },
-      { label: "Careers", href: `${site.url}/careers` },
-      { label: "Contact", href: `${site.url}/contact` },
+      { label: "g1 Mato Grosso", href: press.g1, external: true },
+      { label: "Olhar Direto", href: press.olharDireto, external: true },
+      { label: "HiperNotícias", href: press.hnt, external: true },
+      { label: "Prefeitura de Cuiabá", href: press.prefeituraMural, external: true },
     ],
   },
   {
-    title: "Social",
+    title: "Perfis",
     links: [
-      { label: "X", href: "https://x.com/", external: true },
-      { label: "Instagram", href: "https://instagram.com/", external: true },
-      { label: "Dribbble", href: "https://dribbble.com/", external: true },
+      { label: "Mapas Culturais MT", href: press.mapas, external: true },
+      { label: "E-mail", href: contactHref },
     ],
   },
 ];
 
-export const footerLegal: NavItem[] = [
-  { label: "Terms", href: `${site.url}/terms` },
-  { label: "Privacy", href: `${site.url}/privacy` },
-  { label: "Cookies", href: `${site.url}/cookies` },
-];
+export const footerLegal: NavItem[] = [{ label: "Voltar ao topo", href: "#top" }];
 
 export const newsletter = {
-  title: "Stay in the loop",
-  description: "Placeholder line about what subscribers receive and how often.",
-  placeholder: "you@company.com",
-  success: "Thanks — you're on the list.",
+  title: "Acompanhe o ateliê",
+  description: "Novas obras, exposições e projetos de rua, de vez em quando.",
+  placeholder: "seu@email.com",
+  success: "Obrigado! Você vai receber as próximas novidades.",
 };
 
-export const systemStatus = "All systems operational";
+export const systemStatus = `Em atividade desde ${FIRST_SALON_YEAR}`;
 
-const unsplash = (id: string) =>
-  `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=720&h=960&q=75`;
+/* -------------------------------------------------------------------------- */
+/*  Imagens                                                                   */
+/* -------------------------------------------------------------------------- */
+
+const IMG = "/images/regis";
+
+/**
+ * Fotos reais do artista. Alguns arquivos têm extensão .png mas são JPEG/WebP/AVIF
+ * por dentro — o Next.js detecta o formato pelo conteúdo, então funcionam assim mesmo.
+ * tela3.png e tela10.png são cópias menores da tela8.png e por isso não são usadas.
+ */
+const img = {
+  /** Telas (pinturas). */
+  rodaDeDanca: `${IMG}/telas/tela1.png`,
+  capoeira: `${IMG}/telas/tela2.png`,
+  baianas: `${IMG}/telas/tela5.png`,
+  mascarados: `${IMG}/telas/tela6.png`,
+  dancaDaFita: `${IMG}/telas/tela7.png`,
+  violaDeCocho: `${IMG}/telas/tela8.png`,
+  dancaIndigena: `${IMG}/telas/tela9.png`,
+  /** Murais (Arte Outside, Escola Floriano Bocheneki). tela4.png é foto de mural. */
+  muroCasario: `${IMG}/telas/tela4.png`,
+  muralPintando: `${IMG}/murais/mural2.png`,
+  muralAlunos: `${IMG}/murais/mural3.png`,
+  muralPerspectiva: `${IMG}/murais/mural4.png`,
+  muralAndaime: `${IMG}/murais/mural5.png`,
+  muralCompleto: `${IMG}/murais/mural6.png`,
+  muralTurma: `${IMG}/murais/mural7.png`,
+  muralEscola: `${IMG}/murais/mural8.png`,
+  /** Exposições — fotos da mostra "Nossa Cultura" no MISC. */
+  misc1: `${IMG}/exposicoes/misc1.png`,
+  misc2: `${IMG}/exposicoes/misc2.png`,
+  misc3: `${IMG}/exposicoes/misc3.png`,
+  /**
+   * TODO: quando tiver as fotos, salve em exposicoes/ com estes nomes e troque os
+   * usos de `img.violaDeCocho`/`img.mascarados` nas abas de Nova York e da Assembleia:
+   * - exposicoes/casa-brasil-nova-york.jpg
+   * - exposicoes/assembleia-legislativa.jpg
+   */
+};
+
+// TODO: troque os textos alternativos pelos títulos reais das obras.
+const telas = [
+  { src: img.violaDeCocho, alt: "Pintura de Régis Gomes: viola de cocho e dançarinos de siriri" },
+  { src: img.muralCompleto, alt: "Mural de Régis Gomes com viola de cocho, Pantanal e cerâmica" },
+  { src: img.mascarados, alt: "Pintura de Régis Gomes: mascarados" },
+  { src: img.muralPintando, alt: "Régis Gomes pintando um mural" },
+  { src: img.rodaDeDanca, alt: "Pintura de Régis Gomes: roda de música e dança" },
+  { src: img.muroCasario, alt: "Mural de Régis Gomes com casario e frutas" },
+  { src: img.capoeira, alt: "Pintura de Régis Gomes: capoeira e baiana" },
+  { src: img.muralPerspectiva, alt: "Mural de Régis Gomes no muro de uma escola" },
+  { src: img.dancaDaFita, alt: "Pintura de Régis Gomes: dança da fita com mascarados" },
+  { src: img.muralAlunos, alt: "Alunos diante do mural de Régis Gomes" },
+  { src: img.baianas, alt: "Pintura de Régis Gomes: baianas em festa de santo" },
+  { src: img.muralAndaime, alt: "Régis Gomes pintando um mural sobre o andaime" },
+  { src: img.dancaIndigena, alt: "Pintura de Régis Gomes: dança indígena" },
+  { src: img.muralTurma, alt: "Turma de alunos em frente ao mural de Régis Gomes" },
+  { src: img.muralEscola, alt: "Alunos e professores diante do mural da escola" },
+];
+
+/* -------------------------------------------------------------------------- */
+/*  Hero                                                                      */
+/* -------------------------------------------------------------------------- */
 
 export const hero = {
-  titleLines: ["A placeholder headline,", "set in the display serif."],
-  eyebrow: "Placeholder tagline for the product.",
+  titleLines: ["As cores do Brasil,", "pintadas em Cuiabá."],
+  eyebrow: "Régis Gomes · artista plástico · Cuiabá, 1974",
   description:
-    "Supporting sentence that explains the promise in one breath. Replace with the brand copy later.",
-  cta: { label: "Comece a criar gratuitamente", href: "#pricing" },
-  /** Abstract colourful placeholders — swap for brand imagery later. */
-  images: [
-    "1541701494587-cb58502866ab",
-    "1618005182384-a83a8bd57fbe",
-    "1557672172-298e090bd0f1",
-    "1620641788421-7a1c342ea42e",
-    "1558591710-4b4a1ae0f04d",
-    "1634017839464-5c339ebe3cb4",
-    "1550684376-efcbd6e3f031",
-    "1614850523459-c2f4c699c52e",
-    "1579546929518-9e396f3cc809",
-    "1604076913837-52ab5629fba9",
-    "1567095761054-7a02e69e5c43",
-    "1617791160505-6f00504e3519",
-    "1549490349-8643362247b5",
-    "1635776062127-d379bfcba9f8",
-    "1563089145-599997674d42",
-    "1636953056323-9c09fdd74fa6",
-  ].map((id, i) => ({ src: unsplash(id), alt: `Abstract artwork ${i + 1}` })),
+    "Uma pintura que transborda das telas para muros, postes e painéis, celebrando o siriri, o cururu, os mascarados e as festas populares do país.",
+  cta: { label: "Conheça as obras", href: "#features" },
+  images: telas,
 };
+
+/* -------------------------------------------------------------------------- */
+/*  Fala do artista (revelada palavra a palavra)                              */
+/* -------------------------------------------------------------------------- */
 
 export const promptReveal = {
-  /** Placeholder prompt — revealed word by word as the visitor scrolls. */
-  prompt:
-    "“A quiet studio at dawn. One sculpted ribbon of colour, drifting in soft light. Leave space on the right for a title, keep the palette calm and warm.”",
+  /** Fala de Régis Gomes ao g1 Mato Grosso (jul/2014), reproduzida literalmente. */
+  prompt: "“Quando eu vejo a minha tela está pronta e ela sempre vem com essas cores vibrantes.”",
   image: {
-    src: "https://images.unsplash.com/photo-1618005198919-d3d4b5a92ead?auto=format&fit=crop&w=2400&h=1350&q=80",
-    alt: "Abstract ribbon of colour rendered from the prompt above",
+    src: img.violaDeCocho,
+    alt: "Pintura de Régis Gomes: viola de cocho e dançarinos de siriri",
   },
-  /** Shown on the bottom-left of the image once it has grown to full size. */
-  caption: "Primeira tomada. Trinta e um segundos.",
-  /** Headline revealed on the dark background as the image slides away. */
-  nextTitle: "Peça doze, não um.",
+  /** Aparece no canto inferior da imagem quando ela ocupa a tela. */
+  caption: "Régis Gomes ao g1 Mato Grosso, 2014",
+  /** Título que surge no fundo escuro quando a imagem sai. */
+  nextTitle: "Doze festas, uma só paleta.",
 };
 
+/* -------------------------------------------------------------------------- */
+/*  Grade de obras (VariationsGrid)                                           */
+/* -------------------------------------------------------------------------- */
+
 export const variations = {
-  /** Visually hidden here — the same line closes the PromptReveal section right above. */
-  title: "Peça doze, não um.",
-  caption: "Placeholder: twelve takes from one brief — keep the one worth presenting.",
+  /** Visualmente oculto aqui — a mesma frase fecha a seção anterior. */
+  title: "Doze festas, uma só paleta.",
+  caption: "Manifestações que atravessam a obra — de Mato Grosso à Bahia, de Pernambuco ao Pará.",
+  /** Imagem usada por qualquer célula sem `src` próprio. */
   image: {
-    src: "https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&h=900&q=80",
-    alt: "Abstract render used as the base for every variation",
+    src: img.violaDeCocho,
+    alt: "Pintura de Régis Gomes",
   },
-  /** Index of the take highlighted at the end of the sequence. */
+  /** Célula destacada no fim da sequência (índice no array `cells`). */
   favoriteIndex: 5,
-  favoriteLabel: "Favorita",
-  /** Exit phase: the favourite zooms to centre stage. */
-  exitTitle: "Fique com aquela que você descartaria.",
-  exitCaption: "Mantido em local mais aquecido, conforme sugerido pelo conselho.",
-  /** First entry is the untouched original — it sits on top of the stack. */
+  favoriteLabel: "Destaque",
+  /** Fase de saída: a obra em destaque cresce até o centro da tela. */
+  exitTitle: "Uma festa em cada tela.",
+  exitCaption: "Acrílica sobre tela, com tecido chitão e adereços aplicados em relevo.",
+  /**
+   * 12 obras (7 telas + 5 murais). A primeira fica no topo da pilha; os rótulos
+   * precisam ser únicos (são usados como chave).
+   * `filter: "none"` mantém as cores originais das pinturas.
+   * TODO: ajuste cada rótulo para o título real da obra correspondente.
+   */
   cells: [
-    { label: "Original", filter: "none" },
-    { label: "Mais frio", filter: "hue-rotate(-30deg) saturate(0.9)" },
-    { label: "Mais suave", filter: "contrast(0.82) brightness(1.08)" },
-    { label: "Mais escuro", filter: "brightness(0.68) contrast(1.1)" },
-    { label: "Dessaturado", filter: "saturate(0.35)" },
-    { label: "Mais quente", filter: "sepia(0.4) saturate(1.3) hue-rotate(-8deg)" },
-    { label: "Mais vivo", filter: "saturate(1.7) contrast(1.15)" },
-    { label: "Desbotado", filter: "contrast(0.78) brightness(1.15) saturate(0.65)" },
-    { label: "Mono", filter: "grayscale(1) contrast(1.1)" },
-    { label: "Mais claro", filter: "brightness(1.28)" },
-    { label: "Invertido", filter: "hue-rotate(160deg) saturate(1.2)" },
-    { label: "Mais profundo", filter: "saturate(1.25) brightness(0.8) contrast(1.15)" },
+    { label: "Roda de dança", src: img.rodaDeDanca, filter: "none" },
+    { label: "Capoeira", src: img.capoeira, filter: "none" },
+    { label: "Mascarados", src: img.mascarados, filter: "none" },
+    { label: "Mural Arte Outside", src: img.muralCompleto, filter: "none" },
+    { label: "Baianas", src: img.baianas, filter: "none" },
+    { label: "Viola de cocho", src: img.violaDeCocho, filter: "none" },
+    { label: "Dança da fita", src: img.dancaDaFita, filter: "none" },
+    { label: "Muro do casario", src: img.muroCasario, filter: "none" },
+    { label: "Dança indígena", src: img.dancaIndigena, filter: "none" },
+    { label: "Mural na escola", src: img.muralPerspectiva, filter: "none" },
+    { label: "Pintura ao vivo", src: img.muralPintando, filter: "none" },
+    { label: "No andaime", src: img.muralAndaime, filter: "none" },
   ],
 };
 
 /* -------------------------------------------------------------------------- */
-/*  Formats                                                                   */
+/*  Suportes (Formats)                                                        */
 /* -------------------------------------------------------------------------- */
 
 export const formats = {
-  title: "One take, every format in the plan.",
+  title: "A pintura como campo ampliado.",
   description:
-    "Placeholder paragraph: the subject is recomposed for each ratio instead of being cropped, so nothing important falls off the edge.",
+    "Da tela para a rua: muros, painéis, postes e fachadas viram suporte para a mesma linguagem de cores fortes e cultura popular.",
+  /** Imagem usada por qualquer item sem `src` próprio. */
   image: {
-    src: unsplash("1620641788421-7a1c342ea42e").replace("w=720&h=960", "w=1600&h=1600"),
-    alt: "Abstract render shown in four aspect ratios",
+    src: img.muralCompleto,
+    alt: "Obra de Régis Gomes",
   },
   items: [
-    { label: "Banner", ratio: "16:9", w: 16, h: 9, focus: "50% 50%" },
-    { label: "Feed", ratio: "1:1", w: 1, h: 1, focus: "45% 50%" },
-    { label: "Portrait", ratio: "4:5", w: 4, h: 5, focus: "55% 50%" },
-    { label: "Story", ratio: "9:16", w: 9, h: 16, focus: "60% 50%" },
+    { label: "Muro", ratio: "16:9", w: 16, h: 9, focus: "50% 50%", src: img.muralCompleto },
+    { label: "Tela", ratio: "1:1", w: 1, h: 1, focus: "50% 50%", src: img.dancaDaFita },
+    // TODO: sem fotos de painel e poste ainda — trocar quando houver.
+    { label: "Painel", ratio: "4:5", w: 4, h: 5, focus: "75% 50%", src: img.misc1 },
+    { label: "Poste", ratio: "9:16", w: 9, h: 16, focus: "40% 50%", src: img.muralAndaime },
   ],
 };
 
 /* -------------------------------------------------------------------------- */
-/*  Stories                                                                   */
+/*  Exposições (Stories)                                                      */
 /* -------------------------------------------------------------------------- */
 
 export const stories = {
-  title: "Teams that stopped waiting on pictures.",
-  description: "Placeholder intro: a few words from the people who use the product every week.",
-  /** Auto-advance interval in ms. */
+  title: "Onde a obra já esteve.",
+  description: "Mostras e intervenções que levaram a cultura popular para museus, galerias e escolas.",
+  /** Intervalo de troca automática, em ms. */
   interval: 7000,
   items: [
     {
-      company: "Northwind",
+      company: "Nova York",
       quote:
-        "Placeholder quote. Our first campaign week used to vanish into sourcing images. Now the brief and the first visuals land on the same afternoon.",
-      name: "Alex Moreau",
-      role: "Design Lead",
-      image: unsplash("1557672172-298e090bd0f1"),
-      caption: "Placeholder caption · spring launch",
+        "Ao lado de outros quatro artistas mato-grossenses, levou suas telas para a mostra coletiva “As Cores do Pantanal”, na Casa Brasil.",
+      /** false = texto descritivo (sem aspas). Use true apenas para falas reais. */
+      cite: false,
+      name: "As Cores do Pantanal",
+      byline: "Casa Brasil, Nova York · 2013",
+      // TODO: trocar por exposicoes/casa-brasil-nova-york.jpg quando houver a foto.
+      image: img.violaDeCocho,
+      imageAlt: "Pintura de Régis Gomes",
+      caption: "As Cores do Pantanal · Nova York",
     },
     {
-      company: "Halcyon",
+      company: "Assembleia Legislativa",
       quote:
-        "Placeholder quote. We stopped arguing about mood boards — we generate twelve directions, pick one together, and move on.",
-      name: "Priya Nair",
-      role: "Creative Director",
-      image: unsplash("1634017839464-5c339ebe3cb4"),
-      caption: "Placeholder caption · product page",
+        "Dezoito pinturas e colagens sobre tela reuniram o siriri, o chorado de Vila Bela, os mascarados de Poconé, o frevo e o carimbó.",
+      cite: false,
+      name: "Cultura Popular Nacional",
+      byline: "Instituto Memória da Assembleia Legislativa de MT · 2014",
+      // TODO: trocar por exposicoes/assembleia-legislativa.jpg quando houver a foto.
+      image: img.mascarados,
+      imageAlt: "Pintura de Régis Gomes: mascarados",
+      caption: "Cultura Popular Nacional · Cuiabá",
     },
     {
-      company: "Atlas & Co",
+      company: "MISC",
       quote:
-        "Placeholder quote. Brand rules finally hold across every format, so reviews are about ideas instead of colour corrections.",
-      name: "Jonas Weber",
-      role: "Brand Manager",
-      image: unsplash("1550684376-efcbd6e3f031"),
-      caption: "Placeholder caption · retail displays",
+        "Dezessete telas em acrílica, com chitão e adereços aplicados, levaram samba, capoeira, Olodum e tradições indígenas ao Museu da Imagem e do Som.",
+      cite: false,
+      name: "Nossa Cultura",
+      byline: "Museu da Imagem e do Som de Cuiabá · 2014",
+      image: img.misc3,
+      imageAlt: "Exposição Nossa Cultura no Museu da Imagem e do Som de Cuiabá",
+      caption: "Nossa Cultura · MISC, Cuiabá",
     },
     {
-      company: "Meridian",
+      company: "Arte Outside",
       quote:
-        "Placeholder quote. A single producer now covers what used to take a small studio, and the work looks more like us than ever.",
-      name: "Sofia Lind",
-      role: "Head of Production",
-      image: unsplash("1579546929518-9e396f3cc809"),
-      caption: "Placeholder caption · social series",
+        "Com apoio do Fundo Municipal de Cultura, o muro de uma escola no Parque Atalaia ganhou viola de cocho, cururu, Pantanal e a cerâmica de São Gonçalo Beira Rio.",
+      cite: false,
+      name: "Arte Outside",
+      byline: "Escola Municipal Floriano Bocheneki, Cuiabá · 2016",
+      image: img.muralEscola,
+      imageAlt: "Alunos diante do mural Arte Outside na Escola Municipal Floriano Bocheneki",
+      caption: "Arte Outside · mural em Cuiabá",
     },
   ],
 };
 
 /* -------------------------------------------------------------------------- */
-/*  Pricing                                                                   */
+/*  Encomendas (Pricing)                                                      */
 /* -------------------------------------------------------------------------- */
 
 export type Plan = {
   id: string;
   name: string;
   tagline: string;
-  monthly: number;
-  annual: number;
+  /** Número = valor numérico com moeda; texto = exibido como está (ex.: "Sob consulta"). */
+  monthly: number | string;
+  annual: number | string;
   allowance: string;
   allowanceNote: string;
   thumb: string;
   features: string[];
   cta: string;
+  ctaHref: string;
   featured?: boolean;
 };
 
 export const pricing = {
-  title: "Priced by output, not by seat.",
+  title: "Telas, murais e projetos sob encomenda.",
   description:
-    "Placeholder paragraph: every plan includes the full toolset and commercial use. Choose an allowance and change it whenever you like.",
-  annualDiscount: 20,
-  featuredBadge: "Most popular",
+    "Obras originais, intervenções em muros e fachadas e ações de formação em cultura popular. Cada projeto é combinado diretamente com o artista.",
+  billingGroupLabel: "Tipo de cliente",
+  /** Rótulos do seletor (antes "mensal/anual"). */
+  billingLabels: { monthly: "Particulares", annual: "Instituições" },
+  /** Desconto exibido no seletor; 0 esconde o selo. */
+  annualDiscount: 0,
+  currency: "R$",
+  priceSuffix: "",
+  billedNote: { monthly: "Valores combinados por projeto", annual: "Propostas para editais e parcerias" },
+  includesLabel: "Inclui",
+  featuredBadge: "Arte de rua",
   plans: [
     {
-      id: "starter",
-      name: "Starter",
-      tagline: "For solo creators.",
-      monthly: 14,
-      annual: 11,
-      allowance: "1,000 images / mo",
-      allowanceNote: "Up to 2K resolution",
-      thumb: unsplash("1604076913837-52ab5629fba9"),
-      features: ["All models", "Reference boards", "One brand kit", "Commercial use", "30-day history"],
-      cta: "Start with Starter",
+      id: "telas",
+      name: "Telas",
+      tagline: "Obras originais em acrílica.",
+      monthly: "Sob consulta",
+      annual: "Sob consulta",
+      allowance: "Acrílica sobre tela",
+      allowanceNote: "Com chitão e adereços em relevo",
+      thumb: img.violaDeCocho,
+      features: [
+        "Obras disponíveis do acervo",
+        "Encomendas por tema",
+        "Cultura popular regional e brasileira",
+        "Cores fortes e relevo",
+      ],
+      cta: "Consultar uma tela",
+      ctaHref: contactHref,
     },
     {
-      id: "team",
-      name: "Team",
-      tagline: "For small teams shipping weekly.",
-      monthly: 45,
-      annual: 36,
-      allowance: "5,000 images / mo",
-      allowanceNote: "Up to 4K resolution",
-      thumb: unsplash("1567095761054-7a02e69e5c43"),
+      id: "murais",
+      name: "Murais e painéis",
+      tagline: "Muros, fachadas, postes e painéis.",
+      monthly: "Sob consulta",
+      annual: "Sob consulta",
+      allowance: "Pintura in loco",
+      allowanceNote: "Escolas, comércios e espaços públicos",
+      thumb: img.muralCompleto,
       features: [
-        "Everything in Starter",
-        "Unlimited seats",
-        "Shared libraries",
-        "Batch variations",
-        "Upscale & background removal",
-        "Design-tool plugins",
+        "Pesquisa do tema com a comunidade",
+        "Projeto e esboço",
+        "Execução no local",
+        "Experiência com projetos de fundo público",
       ],
-      cta: "Start with Team",
+      cta: "Pedir orçamento de mural",
+      ctaHref: contactHref,
       featured: true,
     },
     {
-      id: "studio",
-      name: "Studio",
-      tagline: "For high-volume production.",
-      monthly: 110,
-      annual: 88,
-      allowance: "18,000 images / mo",
-      allowanceNote: "4K + upscale",
-      thumb: unsplash("1617791160505-6f00504e3519"),
+      id: "formacao",
+      name: "Oficinas e palestras",
+      tagline: "Cultura popular em sala e na rua.",
+      monthly: "Sob consulta",
+      annual: "Sob consulta",
+      allowance: "Formação",
+      allowanceNote: "Escolas, coletivos e eventos",
+      thumb: img.muralAlunos,
       features: [
-        "Everything in Team",
-        "Custom-trained styles",
-        "Roles & approvals",
-        "API access",
-        "SSO & audit log",
-        "Priority queue",
+        "Palestras sobre cuiabania",
+        "Oficinas de pintura",
+        "Cultura afro-brasileira, capoeira e percussão",
+        "Formatos para editais",
       ],
-      cta: "Start with Studio",
+      cta: "Agendar uma conversa",
+      ctaHref: contactHref,
     },
   ] satisfies Plan[],
   enterprise: {
-    title: "Enterprise",
-    description: "Placeholder: your terms, your models, your infrastructure.",
-    cta: { label: "Talk to sales", href: `mailto:${site.email}` },
+    title: "Instituições",
+    description:
+      "Primeiro mato-grossense eleito para o Conselho Nacional de Política Cultural, Régis desenvolve projetos com museus, escolas e editais públicos.",
+    cta: { label: "Falar com o artista", href: contactHref },
     features: [
-      "Everything in Studio",
-      "Private model hosting",
-      "Custom data agreements",
-      "Uptime SLA",
-      "Volume pricing",
-      "Onboarding & training",
-      "Dedicated account team",
-      "Invoicing & procurement",
+      "Projetos para editais",
+      "Murais em escolas",
+      "Exposições em museus",
+      "Cultura afro-brasileira",
+      "Pesquisa em cultura popular",
+      "Produção cultural",
+      "Arte de rua",
+      "Ações de formação",
     ],
     images: [
-      unsplash("1549490349-8643362247b5"),
-      unsplash("1635776062127-d379bfcba9f8"),
-      unsplash("1563089145-599997674d42"),
+      img.misc1,
+      img.misc2,
+      img.misc3,
     ],
   },
-  footnote:
-    "Placeholder footnote: prices in USD before tax. Unused images roll over for one month.",
+  footnote: "Valores e prazos definidos caso a caso, conforme dimensões, suporte e local.",
 };
 
 /* -------------------------------------------------------------------------- */
-/*  FAQ                                                                       */
+/*  Sobre (FAQ)                                                               */
 /* -------------------------------------------------------------------------- */
 
 export const faq = {
-  title: "Questions people ask before the first render.",
-  description: "Placeholder: missing something? Write to us and a person will reply within a working day.",
+  title: "Sobre o artista.",
+  description: "Quer saber mais sobre obras, encomendas ou exposições? Escreva para",
   items: [
     {
-      q: "Who owns the images I create?",
-      a: "Placeholder answer. Describe ownership and the commercial rights included on every plan.",
+      q: "Quem é Régis Gomes?",
+      a: "Artista plástico nascido em Cuiabá em 1974, autodidata, com uma trajetória dedicada à cultura popular regional e brasileira. Atua nas artes visuais, na arte de rua e na produção cultural.",
     },
     {
-      q: "Is my work used for training?",
-      a: "Placeholder answer. Explain the data policy and any opt-in or opt-out controls.",
+      q: "Como começou a pintar?",
+      a: "Ainda na escola participava de concursos de desenho e criava histórias em quadrinhos. Aos 16 anos expôs no 1º Salão Jovem Arte Mato-grossense e passou a frequentar o Ateliê Livre da Fundação Cultural, com orientação da artista Osvaldina dos Santos.",
     },
     {
-      q: "What counts as one image?",
-      a: "Placeholder answer. Clarify how renders, variations, upscales and resizes are counted.",
+      q: "Quais técnicas e materiais usa?",
+      a: "Principalmente tinta acrílica, em cores fortes. Em muitas telas aplica tecido chitão e objetos reais — fitas, colares, plumas — que criam relevo e remetem às festas retratadas.",
     },
     {
-      q: "How do brand kits work?",
-      a: "Placeholder answer. Outline colours, typography, references and how they are enforced.",
+      q: "Que temas aparecem nas obras?",
+      a: "Siriri, cururu, viola de cocho, mascarados de Poconé, chorado de Vila Bela, boi-à-serra e festas de santo, ao lado do frevo, do samba, da capoeira, do Olodum, do carimbó e de tradições indígenas.",
     },
     {
-      q: "Can I use my own photos as references?",
-      a: "Placeholder answer. Mention supported formats, limits and how references steer results.",
+      q: "Onde já expôs?",
+      a: "Na Casa Brasil, em Nova York, com a mostra coletiva As Cores do Pantanal; e, em Cuiabá, na Galeria da Secretaria de Estado de Cultura, no Instituto Memória da Assembleia Legislativa, no Museu do Rio e no Museu da Imagem e do Som, entre outros espaços.",
     },
     {
-      q: "What happens if I run out of images?",
-      a: "Placeholder answer. Describe overage options, top-ups and plan changes.",
+      q: "Qual a ligação com as políticas culturais?",
+      a: "Em 2015 foi eleito, no Fórum Nacional Setorial, o primeiro mato-grossense a integrar o Conselho Nacional de Política Cultural. Também atua há décadas com cultura afro — capoeira e percussão — e integra a Companhia de Dança e Teatro Ayoluwá.",
+    },
+    {
+      q: "Como encomendar uma obra ou um mural?",
+      a: "Envie um e-mail contando o tipo de projeto, o local e o prazo desejado. Telas, murais, painéis e oficinas são combinados diretamente com o artista.",
     },
   ],
 };
 
 /* -------------------------------------------------------------------------- */
-/*  Final CTA                                                                 */
+/*  Chamada final (onda de imagens)                                           */
 /* -------------------------------------------------------------------------- */
 
 export const finalCta = {
-  title: ["A imagem que você tem na cabeça,", "até a hora do almoço."],
-  description: "Placeholder: start on the free plan, bring a real brief and see the first take in minutes.",
-  primary: { label: "Comece a criar gratuitamente", href: `${site.appUrl}/sign-up` },
-  secondary: { label: "Veja os planos", href: "#pricing" },
-  /** Wave marquee reuses the hero's abstract set. */
-  images: hero.images,
+  title: ["A cultura do Brasil,", "pintada a partir de Cuiabá."],
+  description: "Telas, murais e projetos que levam a festa popular para galerias, escolas e ruas.",
+  primary: { label: "Ver as obras", href: "#features" },
+  secondary: { label: "Fale com o artista", href: contactHref },
+  /** A onda reutiliza as mesmas obras do carrossel do topo. */
+  images: telas,
 };
 
 /* -------------------------------------------------------------------------- */
-/*  Benchmarks — all numbers are placeholders                                 */
+/*  Trajetória (Benchmarks) — apenas dados verificados nas fontes             */
 /* -------------------------------------------------------------------------- */
 
+const yearsSince = (year: number) => CURRENT_YEAR - year;
+
 export const benchmarks = {
-  title: "Mais rápido do que a sessão de fotos que você teria agendado.",
+  title: "Mais de três décadas pintando a cultura popular.",
   description:
-    "Placeholder paragraph: describe how these numbers were measured, over which period, and on which queue.",
+    "Do primeiro salão, ainda adolescente, aos museus de Cuiabá, a Nova York e ao Conselho Nacional de Política Cultural.",
   headline: {
-    value: 28,
-    unit: "s",
-    label: "Median time to a first render",
+    value: yearsSince(FIRST_SALON_YEAR),
+    /** Valor inicial da contagem animada. */
+    from: 0,
+    unit: "anos",
+    label: "de trajetória nas artes plásticas",
     description:
-      "Placeholder: from pressing render to a full-resolution image, measured daily over the last thirty days.",
-    /** Daily medians (seconds) for the last 30 days — placeholder series. */
-    series: [
-      41, 40, 42, 39, 38, 39, 37, 38, 36, 37, 35, 36, 34, 35, 33, 34, 33, 32, 33, 31, 32, 30, 31, 30, 29,
-      30, 29, 28, 29, 28,
-    ],
-    yTicks: [25, 30, 35, 40, 45],
-    xLabels: ["30 days ago", "Today"],
+      "Contados desde 1990, quando expôs no 1º Salão Jovem Arte Mato-grossense, aos 16 anos. No gráfico: número de obras em cada mostra de 2014.",
+    /** Obras por mostra em 2014: SEC-MT (jan), Assembleia Legislativa (fev), MISC (jul). */
+    series: [15, 18, 17],
+    yTicks: [10, 15, 20],
+    /** Sufixo dos valores do eixo do gráfico. */
+    chartUnit: "",
+    xLabels: ["Jan 2014", "Jul 2014"],
   },
   stats: [
-    { value: 1.2, suffix: "M", label: "Images rendered last month" },
-    { value: 58, suffix: "%", label: "Approved on the first take" },
-    { value: 98.7, suffix: "%", label: "Brand rules respected" },
+    { value: 3, suffix: "", label: "mostras em Cuiabá só em 2014: SEC-MT, Assembleia Legislativa e MISC" },
+    { value: 1, suffix: "º", label: "mato-grossense eleito para o Conselho Nacional de Política Cultural (2015)" },
+    { value: 420, suffix: "+", label: "alunos da escola que recebeu o mural Arte Outside (2016)" },
   ],
   comparison: {
-    title: "Brief to approved image.",
-    description:
-      "Placeholder: the same brief taken through four common workflows, timed end to end. Log scale.",
-    /** Durations in seconds; `display` is the human label. */
+    title: "Marcos da trajetória.",
+    description: "Anos decorridos desde cada marco, em escala logarítmica.",
+    /** `seconds` guarda a quantidade (aqui, anos) — o gráfico só usa o número. */
     items: [
-      { label: "Lumen", seconds: 28, display: "28 s", highlight: true },
-      { label: "Stock search", seconds: 90 * 60, display: "90 min" },
-      { label: "Retouching", seconds: 1.5 * 86400, display: "1.5 days" },
-      { label: "Photo shoot", seconds: 14 * 86400, display: "2 weeks" },
+      { label: "1º Salão Jovem Arte", seconds: yearsSince(1990), display: `1990 · ${yearsSince(1990)} anos`, highlight: true },
+      { label: "Casa Brasil, NY", seconds: yearsSince(2013), display: `2013 · ${yearsSince(2013)} anos` },
+      { label: "Conselho Nacional", seconds: yearsSince(2015), display: `2015 · ${yearsSince(2015)} anos` },
+      { label: "Mural Arte Outside", seconds: yearsSince(2016), display: `2016 · ${yearsSince(2016)} anos` },
     ],
     ticks: [
-      { label: "1 min", seconds: 60 },
-      { label: "1 hour", seconds: 3600 },
-      { label: "1 day", seconds: 86400 },
-      { label: "1 week", seconds: 7 * 86400 },
-      { label: "1 month", seconds: 30 * 86400 },
+      { label: "1 ano", seconds: 1 },
+      { label: "5 anos", seconds: 5 },
+      { label: "10 anos", seconds: 10 },
+      { label: "20 anos", seconds: 20 },
+      { label: "40 anos", seconds: 40 },
     ],
-    /** Left edge of the log axis. */
-    minSeconds: 10,
+    /** Borda esquerda do eixo. */
+    minSeconds: 1,
   },
 };

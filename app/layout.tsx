@@ -7,7 +7,7 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SkipLink } from "@/components/layout/skip-link";
 import { SmoothScroll } from "@/components/layout/smooth-scroll";
 import { ThemeProvider } from "@/components/providers/theme-provider";
-import { site } from "@/lib/content";
+import { site, ui } from "@/lib/content";
 import { cn } from "@/lib/utils";
 
 import "./globals.css";
@@ -38,7 +38,7 @@ export const metadata: Metadata = {
   description: site.description,
   keywords: [...site.keywords],
   authors: [{ name: site.name, url: site.url }],
-  creator: site.twitter,
+  creator: site.twitter || undefined,
   publisher: site.name,
   alternates: { canonical: "/" },
   robots: {
@@ -54,7 +54,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: "website",
-    locale: "en_US",
+    locale: ui.locale,
     url: site.url,
     siteName: site.name,
     title: site.name,
@@ -62,7 +62,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    creator: site.twitter,
+    creator: site.twitter || undefined,
     title: site.name,
     description: site.description,
   },
@@ -81,7 +81,7 @@ export const viewport: Viewport = {
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
-      lang="en"
+      lang={ui.lang}
       suppressHydrationWarning
       className={cn(
         geistSans.variable,

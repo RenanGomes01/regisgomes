@@ -32,7 +32,7 @@ export function Formats() {
                   className="relative h-[min(15rem,calc(80vw/var(--ratio)))] overflow-hidden rounded-2xl bg-muted ring-1 ring-border sm:h-[min(18rem,calc(70vw/var(--ratio)))] md:h-[min(20rem,calc(60vw/var(--ratio)))] lg:h-auto lg:w-full"
                 >
                   <Image
-                    src={formats.image.src}
+                    src={item.src ?? formats.image.src}
                     alt={`${formats.image.alt} — ${item.label} ${item.ratio}`}
                     fill
                     sizes="(max-width: 1024px) 70vw, 40vw"

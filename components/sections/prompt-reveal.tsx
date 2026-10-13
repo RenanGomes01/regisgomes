@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useRef } from "react";
 
 import { useRange } from "@/hooks/use-range";
-import { promptReveal } from "@/lib/content";
+import { promptReveal, ui } from "@/lib/content";
 
 /* -------------------------------------------------------------------------- */
 /*  Scroll timeline (fractions of the section's scroll progress, 0 → 1)       */
@@ -81,7 +81,7 @@ export function PromptReveal() {
   return (
     <section
       ref={sectionRef}
-      aria-label="From prompt to image"
+      aria-label={ui.promptSectionLabel}
       data-header-theme="dark"
       className="dark relative h-[440vh] bg-background text-foreground"
     >
