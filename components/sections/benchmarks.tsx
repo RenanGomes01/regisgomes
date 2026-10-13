@@ -32,7 +32,7 @@ export function Benchmarks() {
             </p>
           </div>
 
-          <ScrollScrubVideo src={headline.video.src} label={headline.video.label} />
+          <ScrollScrubVideo src={headline.video.src} poster={headline.video.poster} label={headline.video.label} />
         </div>
 
         {/* Stat tiles */}

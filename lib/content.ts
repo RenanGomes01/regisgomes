@@ -525,6 +525,8 @@ export const benchmarks = {
     /** Timelapse controlado pelo scroll (16:9, sem áudio). */
     video: {
       src: "/videos/timelapse.mp4",
+      /** Capa exibida enquanto o vídeo carrega (evita o espaço em branco no celular). */
+      poster: img.muralPintando,
       label: "Timelapse de Régis Gomes pintando um mural",
     },
   },
