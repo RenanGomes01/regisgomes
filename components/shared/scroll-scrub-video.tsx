@@ -12,12 +12,12 @@ type ScrollScrubVideoProps = {
 /**
  * A muted video whose playback position follows the page scroll: 0% when the
  * container's top reaches 85% of the viewport, 100% when its bottom reaches 25%.
+ * The file is encoded with a keyframe every 6 frames, so seeking on every scroll
+ * change stays cheap.
  */
 export function ScrollScrubVideo({ src, label, className }: ScrollScrubVideoProps) {
   const containerRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  /** Latest requested time while the browser is still busy with a previous seek. */
-  const pendingTime = useRef<number | null>(null);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -27,24 +27,10 @@ export function ScrollScrubVideo({ src, label, className }: ScrollScrubVideoProp
   function seek(progress: number) {
     const video = videoRef.current;
     if (!video || !Number.isFinite(video.duration) || video.duration === 0) return;
-
-    const time = progress * video.duration;
-    // Seeks don't queue nicely — keep only the newest target until the current one lands.
-    if (video.seeking) {
-      pendingTime.current = time;
-      return;
-    }
-    video.currentTime = time;
+    video.currentTime = progress * video.duration;
   }
 
-  useMotionValueEvent(scrollYProgress, "change", seek);
-
-  function handleSeeked() {
-    const video = videoRef.current;
-    if (!video || pendingTime.current === null) return;
-    video.currentTime = pendingTime.current;
-    pendingTime.current = null;
-  }
+  useMotionValueEvent(scrollYProgress, "change", (latest) => seek(latest));
 
   return (
     <div ref={containerRef} className={className}>
@@ -58,7 +44,6 @@ export function ScrollScrubVideo({ src, label, className }: ScrollScrubVideoProp
         disablePictureInPicture
         // Metadata just arrived: jump to wherever the page is already scrolled.
         onLoadedMetadata={() => seek(scrollYProgress.get())}
-        onSeeked={handleSeeked}
         className="aspect-video h-auto w-full rounded-xl object-cover shadow-2xl"
       />
     </div>
